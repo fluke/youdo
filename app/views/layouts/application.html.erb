@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Youdo</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="#">Youdo</a>
+				<ul class="nav">
+					<li><%= link_to "All Tasks", tasks_path %></li>
+					<li><%= link_to "New Task", new_task_path %></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid maxwidth">
+		<%= yield %>
+	</div>
+	<script>
+	 $("a").click(function(){
+	 	var $this = $(this);
+		var value = $this.attr('data-option-value');
+		$('#container').isotope({
+		  // options
+		  itemSelector : '.item',
+		  layoutMode : 'fitRows',
+		  filter: value
+		});
+	 });
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="page-header"><h1>All Tasks</h1></div>
+  
+  <p>
+    <strong>Filter: </strong>&nbsp;
+    <a href="#one" data-option-value="*">All</a>&nbsp;
+    <a href="#one" data-option-value=".one">One</a>&nbsp;
+    <a href="#two" data-option-value=".two">Two</a>&nbsp;
+    <a href="#three" data-option-value=".three">Three</a>
+  </p>
+
+  <ul id="container" class="grid taskforce container-fluid">  
+    <% @tasks.each_slice(2) do |slice| %>  
+      <% slice.each do |task| %>
+      <li class="<%= cycle("one", "two", "three") %> item">
+          <figure>
+              <!-- <%= image_tag("1.png", :alt => "rss feed") %> -->
+              <h3><%= task.name %></h3>
+              <figcaption>  
+                  <h3><%= task.name %></h3>
+                  <span class="content"><%= task.content %></span>
+                  <span><%= link_to time_ago_in_words(task.created_at)+" ago", task %></span>
+              </figcaption>
+              <div class="buttonarray">
+                <span class="admin">
+                  <%= link_to "Edit", edit_task_path(task) %>
+                  <%= link_to "Destroy", task, method: :delete, data: { confirm: "Are you sure?" } %>
+                </span>
+              </div>
+          </figure>
+      </li>
+      <% end %>
+    <% end %>
+    <li class="new-task">
+          <figure>
+            <%= render 'form' %>
+          </figure>
+      </li>
+  </ul>
+
+
+
+<br />
